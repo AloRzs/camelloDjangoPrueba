@@ -1,5 +1,5 @@
 {%extends 'html/navbarPadre.html' %}
-
+{%load static%}
 {% block content %}
 
 
@@ -18,14 +18,14 @@
         <footer class="parteAbajo" style="width:100%;">
             <div class="contenidoEmpleados">
               <header>
-                <img src="img_combos/Matias.jpeg" alt="" class="losPerlas">
+                <img src="{% static 'img/Matias.jpeg'%}" alt="" class="losPerlas">
               </header>
               <h5>Matías Pozo</h5>
 
             </div>
             <div class="contenidoEmpleados">
               <header>
-                <img src="img_combos/Alonso.jpg" alt="" class="losPerlas">
+                <img src="{%static 'img/Alonso.jpg'%}" alt="" class="losPerlas">
               </header>
               <h5>Alonso Rozas</h5>
 
