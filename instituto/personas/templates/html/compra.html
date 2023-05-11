@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimulacionCompra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos/styleCompra.css">
+    <link rel="stylesheet" href="estilos/general.css">
+    <link rel="stylesheet" href="estilos/normalize.css">
+    <script src="js/funciones.js"></script>
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid" style="background-image:url(img_combos/fondo.jpg)">
+              
+              <a class="navbar-brand" href="Pagina web.html">CF</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+      
+                  <a class="nav-link active" aria-current="page" href="Pagina web.html">Inicio</a>
+                  <a class="nav-link" href="nuestrosProductos.html">Nuestros Productos</a>
+                  <a class="nav-link" href="acerca de nosotros.html">Acerca de Nosotros</a>
+                  <a class="nav-link" href="contacto.html"> Contactanos</a>
+                  <a class="nav-link" href="compra.html"> SimulacionCompra</a>
+                  <a class="nav-link" href="ers.html"> Ers</a>
+                  <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+                </div>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    <br>
+
+    <main>
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col">
+                    <h1 style="text-align:center ;"> Carrito de Compra</h1>
+                    <form id="procesar-pago" action="#">
+
+                        <div id="carrito" class="table-responsive">
+                            <table class="table" id="lista-compra">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">NombreCombo</th>
+                                        <th scope="col">Valor Unitario</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Agregar/Eliminar</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <div class="item">
+                                            <td><img src="img_combos/salchipapa +bebida.jpg" style="width: 100px;" alt=""></td>
+                                            <td><p>#03</p></td>
+                                            <td><p>SalchiPapa + Bebida</p></td>
+                                            <td><p id="precioUnitario" value="2000" type="number" name="precioUnitario">2000</p></td>
+                                            <td>
+                                                <h5 id="cantidad1" type="number" name="cantidad1">0</h5>
+                                            </td>
+                                            <td>
+                                                <button onclick="incremento(1)" class="botonCantidad">+</button>
+                                                <button onclick="decremento(1)" class="botonCantidad">-</button>
+                                            </td>
+                                        </div>  
+                                        
+
+                                    </tr>
+                                    <tr>
+                                        <div class="item">
+                                            <td><img src="img_combos/2 churrascos+bebida.jpg" style="width: 100px;" alt=""></td>
+                                            <td><p>#08</p></td>
+                                            <td><p>2 Churrascos + Bebida</p></td>
+                                            <td><p id="precioUnitario" value="9000" type="number" name="precioUnitario">9000</p></td>
+                                            <td>
+                                                <h5 id="cantidad2" type="number" name="cantidad2">0</h5>
+                                            </td>
+                                            <td>
+                                                <button onclick="incremento(2)" class="botonCantidad">+</button>
+                                                <button onclick="decremento(2)" class="botonCantidad">-</button>
+                                            </td>
+                                        </div>  
+                                        
+
+                                    </tr>
+                                    <tr>
+                                        <div class="item">
+                                            <td><img src="img_combos/churrasco+bebida.jpg" style="width: 100px;" alt=""></td>
+                                            <td><p>#07</p></td>
+                                            <td><p>Churrasco + Bebida</p></td>
+                                            <td><p id="precioUnitario" value="4800" type="number" name="precioUnitario">4800</p></td>
+                                            <td>
+                                                <h5 id="cantidad3" type="number" name="cantidad3">0</h5>
+                                            </td>
+                                            <td>
+                                                <button onclick="incremento(3)" class="botonCantidad">+</button>
+                                                <button onclick="decremento(3)" class="botonCantidad">-</button>
+                                            </td>
+                                        </div>  
+                                        
+
+                                    </tr>
+                                    <tr>
+                                        <div class="item">
+                                            <td><img src="img_combos/completo+bebida.jpg" style="width: 100px;" alt=""></td>
+                                            <td><p>#01</p></td>
+                                            <td><p>Completo + Bebida</p></td>
+                                            <td><p id="precioUnitario" value="2000" type="number" name="precioUnitario">2000</p></td>
+                                            <td>
+                                                <h5 id="cantidad4" type="number" name="cantidad4">0</h5>
+                                            </td>
+                                            <td>
+                                                <button onclick="incremento(4)" class="botonCantidad">+</button>
+                                                <button onclick="decremento(4)" class="botonCantidad">-</button>
+                                            </td>
+                                        </div>  
+                                        
+
+                                    </tr>
+                                    <tr>
+                                        <div class="item">
+                                            <td><img src="img_combos/hamburguesa queso+bebida.jpg" style="width: 100px;" alt=""></td>
+                                            <td><p>#10</p></td>
+                                            <td><p>Hamburguesa Queso + Bebida</p></td>
+                                            <td><p id="precioUnitario" value="2500" type="number" name="precioUnitario">2500</p></td>
+                                            <td>
+                                                <h5 id="cantidad5" type="number" name="cantidad5">0</h5>
+                                            </td>
+                                            <td>
+                                                <button onclick="incremento(5)" class="botonCantidad">+</button>
+                                                <button onclick="decremento(5)" class="botonCantidad">-</button>
+                                            </td>
+                                        </div>  
+                                        
+
+                                    </tr>
+                                </tbody>
+                                <tr>
+                                    <td><button type="button" onclick="calcular()" class="botonCalculo">Calcular</button></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">TOTAL :</th>
+                                    <th scope="col">
+                                        <p id="total" type="number"></p>
+                                    </th>
+                                    <!-- <th scope="col"></th> -->
+                                </tr>
+                                
+                            </table>
+                        </div>
+
+                            <div class="col-xs-12 col-md-4">
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Realizar compra
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmación de Pedido</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Desea confirmar su pedido?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <a href="" class="btn btn-success btn-block" id="procesar-compra">Realizar compra</a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </main>
+
+
+
+
+
+    </div>
+    
+
+    <script src="js/funcionesCompra.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+</body>
+</html>

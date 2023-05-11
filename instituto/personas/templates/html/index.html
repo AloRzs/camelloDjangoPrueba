@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camello´s fooding</title>
+  <link rel="shortcut icon" href="img_combos/logo camello.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href='{% static "estilos/styleInicio.css" %}'>
+  <link rel="stylesheet" href='{% static "estilos/ColoresBoost.scss" %}'>
+  <link rel="stylesheet" href='{% static "estilos/general.css" %}'>
+  <link rel="stylesheet" href='{% static "estilos/normalize.css" %}'>
+  
+</head>
+<body>
+  <!-- clase para poner cargando en un formulario o alguna otra cosa xD
+    
+    <div class="spinner-border text-warning" role="status">
+    <span class="visually-hidden">Loading...</span>-->
+
+
+    <!-- seccion principal -->
+
+    <div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid" style="background-image:url(img_combos/fondo.jpg)">
+        
+        <a class="navbar-brand" href="Pagina web.html">CF</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+
+            <a class="nav-link active" aria-current="page" href="Pagina web.html">Inicio</a>
+            <a class="nav-link" href="nuestrosProductos.html">Nuestros Productos</a>
+            <a class="nav-link" href="acerca de nosotros.html">Acerca de Nosotros</a>
+            <a class="nav-link" href="contacto.html"> Contactanos</a>
+            <a class="nav-link" href="compra.html"> SimulacionCompra</a>
+            <a class="nav-link" href="ers.html"> Ers</a>
+            <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+          </div>
+        </div>
+      </div>
+    </nav>
+  <br>
+  <br>
+
+
+</div>
+      {% block content %}
+
+      {% endblock %}
+
+  
+  <div class="alert alert-warning" role="alert">
+    <h6 style="text-align:center">bienvenido a camello's Food en donde encontraras lo mas rico <img src="emoji rico.png" alt="" height="20" ></h6>
+
+
+      <!-- carrusel -->
+      <div style="width: 100% ;" id="carouselExampleControls" class="carousel slide mx-auto" data-bs-ride="carousel" >
+        <div class="carousel-inner">
+
+          <div class="carousel-item active comboEstandar" >
+            <img src="img_combos/papas.jpg" height="600"class="d-block w-100 imagenesInicio" alt="..." >
+            <p>¡Deliciosas Papitas del Camello!</p>
+          </div>
+          <div class="carousel-item" class="comboEstandar">
+            <img src="img_combos/pizza.jpg" height="600" class="d-block w-100 imagenesInicio" alt="..." >
+            <p>Pizzas Deliciosas</p>
+          </div>
+          <div class="carousel-item" class="comboEstandar">
+            <img src="img_combos/sandwich.jpg" height="600" class="d-block w-100 imagenesInicio" alt="..." >
+            <p>Unas Hamburguesas para chuparse los dedos</p>
+          </div>
+          <div class="carousel-item" class="comboEstandar">
+            <img src="img_combos/Completo.jpg" height="600" class="d-block w-100 imagenesInicio" alt="..." >
+            <p>Completos Deliciosos</p>
+          </div>
+          <div class="carousel-item" class="comboBigcam">
+            <img src="img_combos/Big camello.png" width="600" height="600" class="d-block w-100 imgBigcamello" alt="...">
+            <p>Y afirmen el camello ¡¡¡Porque esta esta deliciosa promo a solo $20.000!!!</p>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      </div>
+      <br>
+<br>
+<br>
+<br>
+
+
+</body>
+</html>

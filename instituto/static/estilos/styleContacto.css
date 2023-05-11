@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100;200&display=swap');
+
+
+
+.clasePadre{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    font-family: 'Lexend Mega', sans-serif;
+    
+}
+
+
+
+.formularioContacto{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff10;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    align-items: center;
+    border-radius: 30px;
+    color: black;
+    padding: 100px;
+
+}
+
+
+#correoInput{
+    display: flex;
+    max-width: 400px;
+}
+
+#textoGrande{
+    display: flex;
+    max-width: 400px;
+}
+
+
+body{
+    background-image: url(../img_combos/fondo.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
