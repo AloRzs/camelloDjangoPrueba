@@ -1,7 +1,7 @@
 body{
-    background-image: url('../img_combos/fondo.jpg');
+    background-image: url("{% static 'img/fondo.jpg' %}") !important; 
 }
 
 li {
-    background-image: url("../img_combos/fondo.jpg")
+    background-image: url("../img/fondo.jpg")
 }
