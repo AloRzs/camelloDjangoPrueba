@@ -1,78 +1,81 @@
 {%extends 'html/navbarPadre.html' %}
 
 {%block content %}
-  <div class="clasePadre">
-    <form class="formularioContacto">
-      <h1>Formulario</h1>
-      <div class="mb-3" style="width:100%;">
-        <label for="correoInput" class="form-label">Correo</label>
-        <input type="email" class="form-control" id="correoInput" aria-describedby="emailHelp" required>
-        <div id="emailHelp" class="form-text"></div>
-      </div>
+{% load static %}
 
-      <div class="btnRadio" style="width:100%;">
-        <div class="form-check">
-        <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
-        <label class="form-check-label" for="validationFormCheck2">Hombre</label>
-      </div>
-      <div class="form-check mb-3">
-        <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
-        <label class="form-check-label" for="validationFormCheck3">Mujer</label>
-        <div class="invalid-feedback">Escoja su Género por favor</div>
-      </div>
-      </div>
 
-    <div class="col-md-3" style="width:100%;">
-      <label for="validationCustom04" class="form-label">Comuna</label>
-      <select class="form-select" id="validationCustom04" required>
-        <option selected disabled value="">...</option>
-        <option>La Florida</option>
-        <option>San Bernardo</option>
-        <option>La Pintana</option>
-      </select>
-      <div class="invalid-feedback">
-        Seleccione una comuna válida
-      </div>
+<div class="clasePadre">
+  <form class="formularioContacto">
+    <h1>Formulario</h1>
+    <div class="mb-3" style="width:100%;">
+      <label for="correoInput" class="form-label">Correo</label>
+      <input type="email" class="form-control" id="correoInput" aria-describedby="emailHelp" minlength="3" maxlength="20" required>
+      <div id="emailHelp" class="form-text"></div>
+      <div id="errorCorreo" class="error-message"></div>
     </div>
-  
 
-      <div class="mb-3" style="width:100%;">
-        <label for="textoGrande" class="form-label"></label>
-        <textarea class="form-control" id="textoGrande" rows="5" placeholder="Escriba lo que quiere comunicar aca"required></textarea>
-      </div>
+    <div class="btnRadio" style="width:100%;">
+      <div class="form-check">
+      <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
+      <label class="form-check-label" for="validationFormCheck2">Hombre</label>
+    </div>
+    <div class="form-check mb-3">
+      <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
+      <label class="form-check-label" for="validationFormCheck3">Mujer</label>
+      <div class="invalid-feedback">Escoja su Género por favor</div>
+    </div>
+    </div>
 
-      <div class="form-check mb-3" style="width:100%;">
-        <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
-        <label class="form-check-label" for="validationFormCheck1">Acuerdo de términos y servicio</label>
-        <div class="invalid-feedback">Tiene que estar de acuerdo con los términos</div>
-      </div>
+  <div class="col-md-3" style="width:100%;">
+    <label for="validationCustom04" class="form-label">Comuna</label>
+    <select class="form-select" id="validationCustom04" required>
+      <option selected disabled value="">...</option>
+      <option>La Florida</option>
+      <option>San Bernardo</option>
+      <option>La Pintana</option>
+    </select>
+    <div class="invalid-feedback">
+      Seleccione una comuna válida
+    </div>
+  </div>
 
-      <button type="submit button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertaModal">Enviar</button>
+
+    <div class="mb-3" style="width:100%;">
+      <label for="textoGrande" class="form-label"></label>
+      <textarea class="form-control" id="textoGrande" rows="5" placeholder="Escriba lo que quiere comunicar aca" maxlength="200" required></textarea>
+    </div>
+
+    <div class="form-check mb-3" style="width:100%;">
+      <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+      <label class="form-check-label" for="validationFormCheck1">Acuerdo de términos y servicio</label>
+      <div class="invalid-feedback">Tiene que estar de acuerdo con los términos</div>
+    </div>
+
+    <button type="submit button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertaModal">Enviar</button>
 
 
+   
 
-
-            <!-- Button trigger modal -->
-      <!-- Modal -->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Understood</button>
-            </div>
+          <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
           </div>
         </div>
       </div>
+    </div>
+  </form>
+ </div>
 
-      
-    </form>
-  </div>
 {%endblock%}

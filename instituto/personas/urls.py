@@ -13,4 +13,10 @@ urlpatterns= [
     path('contacto',views.contacto, name='contacto'),
     path('nosotros',views.nosotros, name='nosotros'),
     path('ers',views.ers, name='ers'),
+
+
+#path de la func login
+    path('login', views.login, name='login'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout_view, name='logout'),
 ]

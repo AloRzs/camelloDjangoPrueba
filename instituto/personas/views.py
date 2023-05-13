@@ -100,3 +100,39 @@ def compra(request):# compra
     
     context ={}
     return render(request,'html/compra.html',context)
+
+
+
+
+
+
+#configuracion de inicio de sesion
+usuarios = [
+{'username': 'mati', 'password': '123'},
+{'username': 'alonso', 'password': '123'},
+]
+
+#imports
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # Verificar si el usuario existe en la lista
+        for usuario in usuarios:
+            if usuario['username'] == username and usuario['password'] == password:
+                request.session['username'] = username  # Guardar el nombre de usuario en la sesión
+                return redirect('index')  # Redirigir al usuario a la página de inicio del proyecto
+
+        error_message = 'Nombre de usuario o contraseña incorrectos.'
+        return render(request, 'html/login.html', {'error': error_message})
+    else:
+        return render(request, 'html/login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('html/login.html')

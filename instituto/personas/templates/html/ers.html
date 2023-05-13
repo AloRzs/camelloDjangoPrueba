@@ -22,12 +22,33 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
   
-              <a class="nav-link active" aria-current="page" href="Pagina web.html">Inicio</a>
-              <a class="nav-link" href="nuestrosProductos.html">Nuestros Productos</a>
-              <a class="nav-link" href="acerca de nosotros.html">Acerca de Nosotros</a>
-              <a class="nav-link" href="contacto.html"> Contactanos</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'index'%}">Inicio</a>
+              <a class="nav-link" href="{% url 'lista_productos' %}">Nuestros Productos</a>
+              <a class="nav-link" href="{% url 'nosotros' %}">Acerca de Nosotros</a>
+              <a class="nav-link" href="{% url 'contacto' %}"> Contactanos</a>
               <a class="nav-link" href="compra.html"> SimulacionCompra</a>
-              <a class="nav-link" href="ers.html"> Ers</a>
+              <a class="nav-link" href="{% url 'ers' %}"> Ers</a>
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+
+
+
+
+                  <!-- LOGIN / NO TOCAR O LA WEA SE BUGEA Y NO DEJA INGRESAR OTRAS PAGINAS NOSE PORQUE PERO HAY QUE VERLO CON MAS CALMA XDE-->
+                  {{ request.user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Cerrar sesion</a>
+              </li>
+              {% endif %}
             </div>
           </div>
         </div>

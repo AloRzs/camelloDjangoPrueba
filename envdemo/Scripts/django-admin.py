@@ -1,4 +1,4 @@
-#!C:\Users\alons\Desktop\Camello Traspaso Django\envdemo\Scripts\python.exe
+#!C:\Users\Mati\AppData\Local\Programs\Python\Python311
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
