@@ -16,111 +16,24 @@
 
        <!-- cartas -->
 <div class="container">
-  {%for carta in listaProducto1%}
   <div id =combos1 class="row container"> 
+    {%for carta in listaProductosMain%}
     <div class="col-4">
         <div class="card mb-3" style="width: 100%;">
           <img src="{%static 'img/'%}{{carta.foto}}" class="img-thumbnail" alt="">
           <div class="card-body">
-            <h5 class="card-title">combo:{{carta.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc">{{carta.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio">{{carta.precio}}</small></p>
-            <p class="card-text"><small class="text-muted">{{carta.stock}}</small></p>
+            <h5 class="card-title" name="idProducto">combo{{carta.id}}</h5>
+            <p class="card-text"><h5 class="parrafoDesc" name="descProducto">{{carta.descripcion}}</h5></p>
+            <p class="card-text"><small class="text-muted precio" name="precioProducto">{{carta.precio}}</small></p>
+            <p class="card-text"><small class="text-muted" name="productoStock">{{carta.stock}}</small></p>
+            <input type="button" value="comprar" name="comprar">
+            
           </div>
-        </div>   
+        </div> 
     </div>
-  {%endfor%}
+    {%endfor%}  
+  </div>
+  
 
-  {%for carta in listaProducto2%}
-  <div id =combos1 class="row container"> 
-    <div class="col-4">
-        <div class="card mb-3" style="width: 100%;">
-          <img src="{%static 'img/'%}{{carta.foto}}" class="img-thumbnail" alt="">
-          <div class="card-body">
-            <h5 class="card-title">combo:{{carta.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc">{{carta.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio">{{carta.precio}}</small></p>
-            <p class="card-text"><small class="text-muted">{{carta.stock}}</small></p>
-          </div>
-        </div>   
-    </div>
-  {%endfor%}
-
-  {%for carta in listaProducto3%}
-  <div id =combos1 class="row container"> 
-    <div class="col-4">
-        <div class="card mb-3" style="width: 100%;">
-          <img src="{%static 'img/'%}{{carta.foto}}" class="img-thumbnail" alt="">
-          <div class="card-body">
-            <h5 class="card-title">combo:{{carta.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc">{{carta.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio">{{carta.precio}}</small></p>
-            <p class="card-text"><small class="text-muted">{{carta.stock}}</small></p>
-          </div>
-        </div>   
-    </div>
-  {%endfor%}
-
-  {%for carta in listaProducto4%}
-  <div id =combos1 class="row container"> 
-    <div class="col-4">
-        <div class="card mb-3" style="width: 100%;">
-          <img src="{%static 'img/'%}{{carta.foto}}" class="img-thumbnail" alt="">
-          <div class="card-body">
-            <h5 class="card-title">combo:{{carta.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc">{{carta.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio">{{carta.precio}}</small></p>
-            <p class="card-text"><small class="text-muted">{{carta.stock}}</small></p>
-          </div>
-        </div>   
-    </div>
-  {%endfor%}
-
-  {%for carta in listaProducto5%}
-  <div id =combos1 class="row container"> 
-    <div class="col-4">
-        <div class="card mb-3" style="width: 100%;">
-          <img src="{%static 'img/'%}{{carta.foto}}" class="img-thumbnail" alt="">
-          <div class="card-body">
-            <h5 class="card-title">combo:{{carta.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc">{{carta.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio">{{carta.precio}}</small></p>
-            <p class="card-text"><small class="text-muted">{{carta.stock}}</small></p>
-          </div>
-        </div>   
-    </div>
-  {%endfor%}
-
-  {%for carta in listaProducto6%}
-  <div id =combos1 class="row container"> 
-    <div class="col-4">
-        <div class="card mb-3" style="width: 100%;">
-          <img src="{%static 'img/'%}{{carta.foto}}" class="img-thumbnail" alt="">
-          <div class="card-body">
-            <h5 class="card-title">combo:{{carta.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc">{{carta.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio">{{carta.precio}}</small></p>
-            <p class="card-text"><small class="text-muted">{{carta.stock}}</small></p>
-          </div>
-        </div>   
-    </div>
-  {%endfor%}
-
-  {%for carta in listaProducto7%}
-  <div id =combos1 class="row container"> 
-    <div class="col-6">
-        <div class="card mb-3" style="width: 100%;">
-          <img src="{%static 'img/'%}{{carta.foto}}" class="img-thumbnail" alt="">
-          <div class="card-body">
-            <h5 class="card-title">combo:{{carta.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc">{{carta.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio">{{carta.precio}}</small></p>
-            <p class="card-text"><small class="text-muted">{{carta.stock}}</small></p>
-          </div>
-        </div>   
-    </div>
-  {%endfor%}
-
-
-</div>
+  
 {%endblock%}

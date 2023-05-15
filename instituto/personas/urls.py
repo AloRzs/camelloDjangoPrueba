@@ -13,7 +13,8 @@ urlpatterns= [
     path('contacto',views.contacto, name='contacto'),
     path('nosotros',views.nosotros, name='nosotros'),
     path('ers',views.ers, name='ers'),
-
+    path('compra',views.compra, name='compra'),
+    
 
 #path de la func login
     path('login', views.login, name='login'),

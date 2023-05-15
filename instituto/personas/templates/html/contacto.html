@@ -9,7 +9,7 @@
     <h1>Formulario</h1>
     <div class="mb-3" style="width:100%;">
       <label for="correoInput" class="form-label">Correo</label>
-      <input type="email" class="form-control" id="correoInput" aria-describedby="emailHelp" minlength="3" maxlength="20" required>
+      <input type="email" class="form-control" id="correoInput" aria-describedby="emailHelp">
       <div id="emailHelp" class="form-text"></div>
       <div id="errorCorreo" class="error-message"></div>
     </div>
@@ -28,7 +28,7 @@
 
   <div class="col-md-3" style="width:100%;">
     <label for="validationCustom04" class="form-label">Comuna</label>
-    <select class="form-select" id="validationCustom04" required>
+    <select class="form-select" id="validationCustom04">
       <option selected disabled value="">...</option>
       <option>La Florida</option>
       <option>San Bernardo</option>
@@ -42,11 +42,11 @@
 
     <div class="mb-3" style="width:100%;">
       <label for="textoGrande" class="form-label"></label>
-      <textarea class="form-control" id="textoGrande" rows="5" placeholder="Escriba lo que quiere comunicar aca" maxlength="200" required></textarea>
+      <textarea class="form-control" id="textoGrande" rows="5" placeholder="Escriba lo que quiere comunicar aca" maxlength="200"></textarea>
     </div>
 
     <div class="form-check mb-3" style="width:100%;">
-      <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+      <input type="checkbox" class="form-check-input" id="validationFormCheck1">
       <label class="form-check-label" for="validationFormCheck1">Acuerdo de términos y servicio</label>
       <div class="invalid-feedback">Tiene que estar de acuerdo con los términos</div>
     </div>
@@ -78,4 +78,23 @@
   </form>
  </div>
 
+ 
+ <script>
+  $(document).ready(function() {
+    const correoInput = $('#correoInput');
+    const errorCorreo = $('#errorCorreo');
+
+    correoInput.on('input', function() {
+      const inputLength = correoInput.val().length;
+      if (inputLength < 3) {
+        errorCorreo.text('Se requiere un mínimo de 3 caracteres.');
+      } else if (inputLength >= 20) {
+        errorCorreo.text('Se permite un máximo de 20 caracteres.');
+        correoInput.val(correoInput.val().substring(0, 20));
+      } else {
+        errorCorreo.text('');
+      }
+    });
+  });
+</script>
 {%endblock%}
