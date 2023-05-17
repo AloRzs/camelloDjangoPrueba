@@ -1,0 +1,42 @@
+{%extends 'html/navbarPadre.html'%}
+{%load static%}
+{% block content %}
+<h1>Carrito de Compras</h1>
+{% if item_carrito %}
+    <table class="table table-hover container">
+        <thead>
+            <tr>
+                <th>Producto Id</th>
+                <th>Descripción</th>
+                <th>Id Nombre</th>
+                <th>Valor Unitario</th>
+                <th>Imagen</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in item_carrito %}
+                <tr>
+                    <td>{{ item.producto.id }}</td>
+                    <td>{{ item.descripcion}}</td>
+                    <td>{{ item.idNombre}}</td>
+                    <td>${{ item.subtotal }}</td>
+                    <td><img src="{%static 'img/'%}{{item.imagen}}" alt="" style="width:69px;height:69px;"></td>
+                    <td>
+                        <a href="{% url 'sacar_del_carrito' item.producto.id %}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Total:</td>
+                <td>${{ precio_total }}</td>
+                <td><a href="{% url 'limpiar' %}">Vaciar carrito</a></td>
+            </tr>
+        </tfoot>
+    </table>
+{% else %}
+    <p>No hay productos en el carrito.</p>
+{% endif %}
+{% endblock %}

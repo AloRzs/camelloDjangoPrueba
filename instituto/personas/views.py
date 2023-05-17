@@ -1,5 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render,redirect
+from django.contrib.auth import logout
 # Create your views here.
 class Persona:
     rut=""
@@ -16,60 +16,212 @@ class Persona:
 
 
 
-class Producto:
-    id=""
-    nombre=""
-    precio=0
-    stock=0
-    foto=""     #ejemplo de foto
-    descripcion=""
-    def __init__(self,id,nombre,precio,stock,foto,descripcion):
-        self.id=id             
-        self.nombre=nombre
-        self.precio=precio
-        self.stock=stock
-        self.foto=foto
-        self.descripcion=descripcion
-    def __str__(self) -> str:#implementar lo de a descripcion
-        return self.id + ", "+self.nombre + ", "+self.precio+ ", "+self.stock+ ", "+self.foto+ ", " +self.descripcion
 
-prod1 = Producto("01","Combo01",2000,45,"completo+bebida.jpg","completo + bebida")
-prod2 = Producto("02","Combo02",3600,54,"2completo+bebida.jpg","2 completo + bebida")
-prod3 = Producto("03","Combo03",2000,70,"salchipapa +bebida.jpg","salchipapa + bebida")
-prod4 = Producto("04", "Combo 04",5600,42,"chorrillana familiar+bebida.jpg","chorrillana familiar + bebida")
-prod5 = Producto("05", "Combo 05",4500,56,"chorrillana+bebida.jpg","chorrillana + bebida")
-prod6 = Producto("06", "Combo 06",8400,46,"chorrillana familiar+bebida.jpg","familiar + bebida")
-prod7 = Producto("07", "Combo 07",4800,67,"churrasco+bebida.jpg","churrasco + bebida")
-prod8 = Producto("08", "Combo 08",9000,82,"2 churrascos+bebida.jpg","2 churrascos + bebida")
-prod9 = Producto("09", "Combo 09",16500,52,"4 churrascos+bebida.jpg","4 churrascos + bebida")
-prod10 = Producto("10", "Combo 10",2500,33,"hamburguesa queso+bebida.jpg","hamburguesa queso + bebida")
-prod11 = Producto("11", "Combo 11",8500,35,"4 hamburguesa queso + bebida.jpg","4 hamburguesa queso + bebida")
-prod12 = Producto("12", "Combo 12",20000,30,"4 italianos + 2 bebidas individuales.jpg","4 italianos + 2 bebidas individuales")
-prod13 = Producto("13", "Combo 13",4800,31,"2 salchipapas individual + bebida 1 lt.jpg","2 salchipapas individual + bebida 1 lt")
-prod14 = Producto("14", "Combo 14",9000,36,"pizza individual + bebida individual.jpg","pizza individual + bebida individual")
-prod15 = Producto("15", "Combo 15",16500,33,"pizza familiar + bebida 1 lt.jpg","pizza familiar + bebida 1 lt")
-prod16 = Producto("16", "Combo 16",4800,54,"2 pizza familiar + bebida 3 lt.jpg","2 pizza familiar + bebida 3 lt")
-prod17 = Producto("17", "Combo 17",9000,60,"2 pizza individual + 2 bebida individual.jpg","2 pizza individual + 2 bebida individual")
-prod18 = Producto("18", "Combo 18",16500,43,"pizza individual + 4 empanadas + bebida individual.jpg","pizza individual + 4 empanadas + bebida individual")
-prod19 = Producto("19", "Combo 19",4800,55,"pizza familiar + 16 empanadas + bebida 3 lt.jpg","pizza familiar + 16 empanadas + bebida 3 lt")
-prod20 = Producto("20", "Combo 20",20000,56,"Big camello.png","2 completos italianos+ 2 churrascos italiano + bebida 3 lt.")
+lista_productos_diccionario=[
+    #{id="" nombre="" precio=0 stock=0 foto=""descripcion=""}
+    {
+    'id':1,
+    'idCombo': "01",
+    'nombre': "Combo01",
+    'precio': 2000,
+    'stock': 45,
+    'foto': "completo+bebida.jpg",
+    'descripcion': "completo + bebida"
+    },
 
-listaProductosMain=[prod1,prod2,prod3,prod4,prod5,prod6,prod7,prod8,prod9,prod10,prod11,prod12,prod13,prod14,prod15
-                ,prod16,prod17,prod18,prod19,prod20]
+    {
+        'id':2,
+        'idCombo': "02",
+        'nombre': "Combo02",
+        'precio': 3600,
+        'stock': 54,
+        'foto': "2completo+bebida.jpg",
+        'descripcion': "2 completo + bebida"
+    },
 
+    {
+        'id':3,
+        'idCombo': "03",
+        'nombre': "Combo03",
+        'precio': 2000,
+        'stock': 70,
+        'foto': "salchipapa+bebida.jpg",
+        'descripcion': "salchipapa + bebida"
+    },
 
-listaProducto1=[prod1,prod2,prod3]
-listaProducto2=[prod4,prod5,prod6]
-listaProducto3=[prod7,prod8,prod9]
-listaProducto4=[prod10,prod11,prod12]
-listaProducto5=[prod13,prod14,prod15]
-listaProducto6=[prod16,prod17,prod18]
-listaProducto7=[prod19,prod20]
+    {
+        'id':4,
+        'idCombo': "04",
+        'nombre': "Combo 04",
+        'precio': 5600,
+        'stock': 42,
+        'foto': "chorrillanafamiliar+bebida.jpg",
+        'descripcion': "chorrillana familiar + bebida"
+    },
 
+    {
+        'id':5,
+        'idCombo': "05",
+        'nombre': "Combo 05",
+        'precio': 4500,
+        'stock': 56,
+        'foto': "chorrillana+bebida.jpg",
+        'descripcion': "chorrillana+bebida"
+    },
 
+    {
+        'id':6,
+        'idCombo': "06",
+        'nombre': "Combo 06",
+        'precio': 8400,
+        'stock': 46,
+        'foto': "chorrillanafamiliar+bebida.jpg",
+        'descripcion': "familiar + bebida"
+    },
+
+    {
+        'id':7,
+        'idCombo': "07",
+        'nombre': "Combo 07",
+        'precio': 4800,
+        'stock': 67,
+        'foto': "churrasco+bebida.jpg",
+        'descripcion': "churrasco + bebida"
+    },
+
+    {
+        'id':8,
+        'idCombo': "08",
+        'nombre': "Combo 08",
+        'precio': 9000,
+        'stock': 82,
+        'foto': "2churrascos+bebida.jpg",
+        'descripcion': "2 churrascos + bebida"
+    },
+
+    {
+        'id':9,
+        'idCombo': "09",
+        'nombre': "Combo 09",
+        'precio': 16500,
+        'stock': 52,
+        'foto': "4churrascos+bebida.jpg",
+        'descripcion': "4 churrascos + bebida"
+    },
+
+    {
+        'id':10,
+        'idCombo': "10",
+        'nombre': "Combo 10",
+        'precio': 2500,
+        'stock': 33,
+        'foto': "hamburguesaqueso+bebida.jpg",
+        'descripcion': "hamburguesa queso + bebida"
+    },
+
+    {
+        'id':11,
+        'idCombo': "11",
+        'nombre': "Combo 11",
+        'precio': 8500,
+        'stock': 35,
+        'foto': "4hamburguesaqueso+bebida.jpg",
+        'descripcion': "4 hamburguesa queso + bebida"
+    },
+
+    {
+        'id':12,
+        'idCombo': "12",
+        'nombre': "Combo 12",
+        'precio': 20000,
+        'stock': 30,
+        'foto': "4italianos+2bebidasindividuales.jpg",
+        'descripcion': "4 italianos + 2 bebidas individuales"
+    },
+
+    {
+        'id':13,
+        'idCombo': "13",
+        'nombre': "Combo 13",
+        'precio': 4800,
+        'stock': 31,
+        'foto': "2salchipapasindividual+bebida1lt.jpg",
+        'descripcion': "2 salchipapas individual + bebida 1 lt"
+    },
+
+    {
+        'id':14,
+        'idCombo': "14",
+        'nombre': "Combo 14",
+        'precio': 9000,
+        'stock': 36,
+        'foto': "pizzaindividual+bebidaindividual.jpg",
+        'descripcion': "pizza individual + bebida individual"
+    },
+
+    {
+        'id':15,
+        'idCombo': "15",
+        'nombre': "Combo 15",
+        'precio': 16500,
+        'stock': 33,
+        'foto': "pizzafamiliar+bebida1lt.jpg",
+        'descripcion': "pizza familiar + bebida 1 lt"
+    },
+    {
+        'id':16,
+        'idCombo': "16",
+        'nombre': "Combo 16",
+        'precio': 4800,
+        'stock': 54,
+        'foto': "2pizzafamiliar+bebida3lt.jpg",
+        'descripcion': "2 pizza familiar + bebida 3 lt"
+    },
+
+    {
+        'id':17,
+        'idCombo': "17",
+        'nombre': "Combo 17",
+        'precio': 9000,
+        'stock': 60,
+        'foto': "2pizzaindividual+2bebidaindividual.jpg",
+        'descripcion': "2 pizza individual + 2 bebida individual"
+    },
+
+    {
+        'id':18,
+        'idCombo': "18",
+        'nombre': "Combo 18",
+        'precio': 16500,
+        'stock': 43,
+        'foto': "pizzaindividual+4empanadas+bebidaindividual.jpg",
+        'descripcion': "pizza individual + 4 empanadas + bebida individual"
+    },
+
+    {
+        'id':19,
+        'idCombo': "19",
+        'nombre': "Combo 19",
+        'precio': 4800,
+        'stock': 55,
+        'foto': "pizzafamiliar+16empanadas+bebida3lt.jpg",
+        'descripcion': "pizza familiar + 16 empanadas + bebida 3 lt"
+    },
+
+    {
+        'id':20,
+        'idCombo': "20",
+        'nombre': "Combo 20",
+        'precio': 20000,
+        'stock': 56,
+        'foto': "Bigcamello.png",
+        'descripcion': "2 completos italianos + 2 churrascos italiano + bebida 3 lt."
+    },
+
+]
 
 def index(request):
-    print("hola estoy en index...")
+    
     context ={}
     return render(request,'html/index.html',context)
 
@@ -81,9 +233,8 @@ def contacto(request):#contacto
 
 def lista_productos(request):#listado productos
     
-    context ={"listaProductosMain":listaProductosMain,"listaProducto1":listaProducto1,"listaProducto2":listaProducto2
-              ,"listaProducto3":listaProducto3,"listaProducto4":listaProducto4,"listaProducto5":listaProducto5
-              ,"listaProducto6":listaProducto6,"listaProducto7":listaProducto7}
+    context ={"lista_productos_diccionario":lista_productos_diccionario}
+    
     return render(request,'html/nuestrosProductos.html',context)
 
 def nosotros(request):# nosotros
@@ -96,14 +247,71 @@ def ers(request):# ers
     context ={}
     return render(request,'html/ers.html',context)
 
-def compra(request):# compra
+def api(request):
     
-    context ={}
-    return render(request,'html/compra.html',context)
+    return render(request,'html/api.html')
 
 
+#esto para funciones del carrito
+def get_product_by_id(producto_id):
+    for product in lista_productos_diccionario:
+        if int(producto_id) == int(product.get('id')):
+            return product
+    return None
+
+def carrito(request):
+    v_cart = request.session.get('cart', {})
+    item_carrito = []
+    precio_total = 0
+    
+    for producto_id, quantity in v_cart.items():
+        producto = get_product_by_id(producto_id)
+
+        if producto:
+
+            subtotal = producto['precio'] * quantity
+            idNumero=producto['id']
+            idNom=producto['idCombo']
+            imagen=producto['foto']
+            descripcionCombo=producto['descripcion']
+            item_carrito.append({
+                'id':idNumero,
+                'imagen':imagen,
+                'producto': producto,
+                'quantity': quantity,
+                'subtotal': subtotal,
+                'idNombre':idNom,
+                'descripcion':descripcionCombo,
+            })
+            precio_total += subtotal
+    
+    return render(request, 'html/carrito.html', {
+        'item_carrito': item_carrito,
+        'precio_total': precio_total,
+    })
+
+def agregar_carrito(request, producto_id):
+    product = get_product_by_id(producto_id)
+    if product:
+        v_carrito = request.session.get('cart', {})
+        v_carrito[producto_id] = v_carrito.get(producto_id, 0) + 1
+        request.session['cart'] = v_carrito
+
+    return redirect('lista_productos')
+
+def sacar_del_carrito(request, producto_id):
+    cart = request.session.get('cart', {})
+    if producto_id in cart:
+        del cart[producto_id]
+        request.session['cart'] = cart
+    return redirect('cart')
+
+def limpiar_carrito(request):
+    request.session['cart'] = {}
+    return redirect('cart')
 
 
+#fin de definiciones de carrito
 
 
 #configuracion de inicio de sesion
@@ -113,8 +321,7 @@ usuarios = [
 ]
 
 #imports
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+
 
 def login(request):
     if request.method == 'POST':
