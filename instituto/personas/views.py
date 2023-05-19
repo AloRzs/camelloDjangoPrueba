@@ -17,7 +17,7 @@ class Persona:
 
 
 class Producto:
-    id=""
+    id=0
     nombre=""
     precio=0
     stock=0
@@ -30,29 +30,29 @@ class Producto:
         self.stock=stock
         self.foto=foto
         self.descripcion=descripcion
-    def __str__(self) -> str:#implementar lo de a descripcion
+    def __str__(self):#implementar lo de a descripcion
         return self.id + ", "+self.nombre + ", "+self.precio+ ", "+self.stock+ ", "+self.foto+ ", " +self.descripcion
 
-prod1 = Producto("01","Combo01",2000,45,"completo+bebida.jpg","completo + bebida")
-prod2 = Producto("02","Combo02",3600,54,"2completo+bebida.jpg","2 completo + bebida")
-prod3 = Producto("03","Combo03",2000,70,"salchipapa +bebida.jpg","salchipapa + bebida")
-prod4 = Producto("04", "Combo 04",5600,42,"chorrillana familiar+bebida.jpg","chorrillana familiar + bebida")
-prod5 = Producto("05", "Combo 05",4500,56,"chorrillana+bebida.jpg","chorrillana + bebida")
-prod6 = Producto("06", "Combo 06",8400,46,"chorrillana familiar+bebida.jpg","familiar + bebida")
-prod7 = Producto("07", "Combo 07",4800,67,"churrasco+bebida.jpg","churrasco + bebida")
-prod8 = Producto("08", "Combo 08",9000,82,"2 churrascos+bebida.jpg","2 churrascos + bebida")
-prod9 = Producto("09", "Combo 09",16500,52,"4 churrascos+bebida.jpg","4 churrascos + bebida")
-prod10 = Producto("10", "Combo 10",2500,33,"hamburguesa queso+bebida.jpg","hamburguesa queso + bebida")
-prod11 = Producto("11", "Combo 11",8500,35,"4 hamburguesa queso + bebida.jpg","4 hamburguesa queso + bebida")
-prod12 = Producto("12", "Combo 12",20000,30,"4 italianos + 2 bebidas individuales.jpg","4 italianos + 2 bebidas individuales")
-prod13 = Producto("13", "Combo 13",4800,31,"2 salchipapas individual + bebida 1 lt.jpg","2 salchipapas individual + bebida 1 lt")
-prod14 = Producto("14", "Combo 14",9000,36,"pizza individual + bebida individual.jpg","pizza individual + bebida individual")
-prod15 = Producto("15", "Combo 15",16500,33,"pizza familiar + bebida 1 lt.jpg","pizza familiar + bebida 1 lt")
-prod16 = Producto("16", "Combo 16",4800,54,"2 pizza familiar + bebida 3 lt.jpg","2 pizza familiar + bebida 3 lt")
-prod17 = Producto("17", "Combo 17",9000,60,"2 pizza individual + 2 bebida individual.jpg","2 pizza individual + 2 bebida individual")
-prod18 = Producto("18", "Combo 18",16500,43,"pizza individual + 4 empanadas + bebida individual.jpg","pizza individual + 4 empanadas + bebida individual")
-prod19 = Producto("19", "Combo 19",4800,55,"pizza familiar + 16 empanadas + bebida 3 lt.jpg","pizza familiar + 16 empanadas + bebida 3 lt")
-prod20 = Producto("20", "Combo 20",20000,56,"Big camello.png","2 completos italianos+ 2 churrascos italiano + bebida 3 lt.")
+prod1 = Producto(1,"Combo01",2000,45,"completo+bebida.jpg","completo + bebida")
+prod2 = Producto(2,"Combo02",3600,54,"2completo+bebida.jpg","2 completo + bebida")
+prod3 = Producto(3,"Combo03",2000,70,"salchipapa +bebida.jpg","salchipapa + bebida")
+prod4 = Producto(4, "Combo 04",5600,42,"chorrillana familiar+bebida.jpg","chorrillana familiar + bebida")
+prod5 = Producto(5, "Combo 05",4500,56,"chorrillana+bebida.jpg","chorrillana + bebida")
+prod6 = Producto(6, "Combo 06",8400,46,"chorrillana familiar+bebida.jpg","familiar + bebida")
+prod7 = Producto(7, "Combo 07",4800,67,"churrasco+bebida.jpg","churrasco + bebida")
+prod8 = Producto(8, "Combo 08",9000,82,"2 churrascos+bebida.jpg","2 churrascos + bebida")
+prod9 = Producto(9, "Combo 09",16500,52,"4 churrascos+bebida.jpg","4 churrascos + bebida")
+prod10 = Producto(9, "Combo 10",2500,33,"hamburguesa queso+bebida.jpg","hamburguesa queso + bebida")
+prod11 = Producto(11, "Combo 11",8500,35,"4 hamburguesa queso + bebida.jpg","4 hamburguesa queso + bebida")
+prod12 = Producto(12, "Combo 12",20000,30,"4 italianos + 2 bebidas individuales.jpg","4 italianos + 2 bebidas individuales")
+prod13 = Producto(13, "Combo 13",4800,31,"2 salchipapas individual + bebida 1 lt.jpg","2 salchipapas individual + bebida 1 lt")
+prod14 = Producto(14, "Combo 14",9000,36,"pizza individual + bebida individual.jpg","pizza individual + bebida individual")
+prod15 = Producto(15, "Combo 15",16500,33,"pizza familiar + bebida 1 lt.jpg","pizza familiar + bebida 1 lt")
+prod16 = Producto(16, "Combo 16",4800,54,"2 pizza familiar + bebida 3 lt.jpg","2 pizza familiar + bebida 3 lt")
+prod17 = Producto(17, "Combo 17",9000,60,"2 pizza individual + 2 bebida individual.jpg","2 pizza individual + 2 bebida individual")
+prod18 = Producto(18, "Combo 18",16500,43,"pizza individual + 4 empanadas + bebida individual.jpg","pizza individual + 4 empanadas + bebida individual")
+prod19 = Producto(19, "Combo 19",4800,55,"pizza familiar + 16 empanadas + bebida 3 lt.jpg","pizza familiar + 16 empanadas + bebida 3 lt")
+prod20 = Producto(20, "Combo 20",20000,56,"Big camello.png","2 completos italianos+ 2 churrascos italiano + bebida 3 lt.")
 
 listaProductosMain=[prod1,prod2,prod3,prod4,prod5,prod6,prod7,prod8,prod9,prod10,prod11,prod12,prod13,prod14,prod15
                 ,prod16,prod17,prod18,prod19,prod20]
@@ -101,8 +101,12 @@ def compra(request):# compra
     context ={}
     return render(request,'html/compra.html',context)
 
-
-
+def detalle(request,producto_id):
+    for producto in listaProductosMain:
+        if producto.id==producto_id:
+            context={"producto":producto}
+            break
+    return render(request,'html/detalleProd.html',context)
 
 
 
