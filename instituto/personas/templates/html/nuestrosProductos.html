@@ -9,7 +9,7 @@
   <br>
   <header class="encabezado container">
     <h1 style="text-align:center;" class="tituloCarta"> Nuestras Exquisitas Promos</h1>
-    <img src="img_combos/emoji rico.png" alt="" class="emoji">
+    <img src="{% static 'img/emoji rico.png' %}" alt="" class="emoji">
   </header>
       
       
@@ -17,17 +17,17 @@
 
        <!-- cartas -->
 <div class="container">
-  <div id =combos1 class="row container"> 
+  <div id="combos1" class="row container"> 
     {%for producto in listaProductosMain%}
     
     <div class="col-4">
-        <div class="card mb-3" style="width: 100%;">
-          <img src="{%static 'img/'%}{{producto.foto}}" class="img-thumbnail" alt="">
+        <div class="card mb-3" >
+          <img src="{%static 'img/'%}{{producto.foto}}" class="img-thumbnail card-img-top" alt="">
           <div class="card-body">
-            <h5 class="card-title" name="idProducto">combo{{producto.id}}</h5>
-            <p class="card-text"><h5 class="parrafoDesc" name="descProducto">{{producto.descripcion}}</h5></p>
-            <p class="card-text"><small class="text-muted precio" name="precioProducto">{{producto.precio}}</small></p>
-            <p class="card-text"><small class="text-muted" name="productoStock">{{producto.stock}}</small></p>
+            <h5 class="card-title" name="idProducto"> Combo: {{producto.id}} </h5>
+            <p class="card-text parrafoDesc" name="descProducto"> {{producto.descripcion}} </p>
+            <p class="card-text"><small class="text-muted precio" name="precioProducto">Precio: ${{producto.precio}}</small></p>
+            <p class="card-text"><small class="text-muted" name="productoStock">Stock: {{producto.stock}}</small></p>
             <form action="{% url 'detalle' producto_id=producto.id %}" method="post">
               {% csrf_token %}
               <input type="submit" value="Detalle">

@@ -1,16 +1,10 @@
-{% load static %}
+{% extends 'html/navbarPadre.html' %}
+{%load static%}
+{% block title %}
+    Inicio de sesión
+{% endblock %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesión</title>
-    <link rel="stylesheet" type="text/css" href='{% static "estilos/Login.css" %}'>
-</head>
-<body>
+{% block content %}
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <label for="username">Nombre de usuario:</label>
@@ -22,5 +16,5 @@
         {% endif %}
         <input type="submit" value="Iniciar sesión">
     </form>
-</body>
-</html>
+{% endblock %}
+

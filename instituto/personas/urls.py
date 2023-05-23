@@ -21,4 +21,6 @@ urlpatterns= [
 
 #path de el carrito compra ojala vaya bien diosito
     path('detalle/<int:producto_id>',views.detalle, name='detalle'),
+    path('carrito/',views.carrito, name='carrito'),
+    path('vaciar_carro/',views.vaciar_carro, name='vaciar_carro'),
 ]

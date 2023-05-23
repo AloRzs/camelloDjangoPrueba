@@ -1,7 +1,0 @@
-body{
-    background-image: url("{% static 'img/fondo.jpg' %}") !important; 
-}
-
-li {
-    background-image: url("../img/fondo.jpg")
-}

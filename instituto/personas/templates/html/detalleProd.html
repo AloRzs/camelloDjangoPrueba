@@ -13,9 +13,18 @@
             <p class="card-text" style="font-size: 27px;">Descripcion: {{producto.descripcion}}</p>
             <p class="card-text" style="font-size: 27px;">Stock: <input type="number" name="" id="" value="{{producto.stock}}" disabled></p>
             <p class="card-text" style="font-size: 27px;">Precio:$ {{producto.precio}}</p>
-            <input type="number" name="" id="" min="1" style="font-size: 27px;" value="1">
             <p class="card-text" style="font-size: 12px;"><small class="text-muted"></small></p>
-            <input type="submit" value="Agregar al Carrito" style="font-size: 12px;">
+            <form action="" method="post">
+              {% csrf_token %}
+              <!-- valores a sacar para metodo POST -->
+              <input type="hidden" name="idProducto" value={{producto.id}}>
+              <input type="hidden" name="foto" value={{producto.foto}}>
+              <input type="hidden" name="descripcion" value={{producto.descripcion}}>
+              <input type="hidden" name="precio" value={{producto.precio}}>
+              
+              <input type="number" name="cantidad" id="cantidad" min="1" max={{producto.stock}} style="font-size: 27px;" value="1">
+              <input type="submit" name="opc" value="Agregar al Carrito" style="font-size: 12px;">
+            </form>
           </div>
         </div>
       </div>
