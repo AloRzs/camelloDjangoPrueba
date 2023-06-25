@@ -30,6 +30,12 @@
             <p class="card-text"><small class="text-muted" name="productoStock">Stock: {{producto.stock}}</small></p>
             <form action="{% url 'detalle' producto_id=producto.id %}" method="post">
               {% csrf_token %}
+              <input type="hidden" name="idProducto" value="{{producto.id}}">
+              <input type="hidden" name="foto" value="{{producto.foto}}">
+              <input type="hidden" name="descripcion" value="{{producto.descripcion}}">
+              <input type="hidden" name="precio" value="{{producto.precio}}">
+
+
               <input type="submit" value="Detalle">
             </form>
             

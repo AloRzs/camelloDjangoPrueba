@@ -23,11 +23,31 @@ class Carrito:
     descripcion=""
     cantidad=0 #esto es lo nuevo en el carrito
     def __init__(self,id,precio,stock,foto,descripcion,cantidad):
+<<<<<<< Updated upstream
+=======
         self.id=id             
         self.precio=precio
         self.stock=stock
         self.foto=foto
         self.descripcion=descripcion
+        self.cantidad=cantidad
+    def __str__(self):#implementar lo de a descripcion
+        return self.id + ", "+self.precio+ ", "+self.stock+ ", "+self.foto+ ", " +self.descripcion+", " + self.cantidad
+
+class Producto:
+    id=0
+    precio=0
+    stock=0
+    foto=""     #ejemplo de foto
+    descripcion=""
+    def __init__(self,id,precio,stock,foto,descripcion):
+>>>>>>> Stashed changes
+        self.id=id             
+        self.precio=precio
+        self.stock=stock
+        self.foto=foto
+        self.descripcion=descripcion
+<<<<<<< Updated upstream
         self.cantidad=cantidad
     def __str__(self):
         str(self.id) + ", " +str(self.precio) + ", " +str(self.stock) + ", " +self.foto + ", " +self.descripcion + ", " +str(self.cantidad)
@@ -49,6 +69,13 @@ class Producto:
 
 prod1 = Producto(1,2000,45,"completo+bebida.jpg","completo con bebida")
 prod2 = Producto(2,3600,54,"2completo+bebida.jpg","2 completo_+_bebida")## arreglar los espacios de la descripcion
+=======
+    def __str__(self):#implementar lo de a descripcion
+        return self.id + ", "+self.precio+ ", "+self.stock+ ", "+self.foto+ ", " +self.descripcion
+
+prod1 = Producto(1,2000,45,"completo+bebida.jpg","completo + bebida")
+prod2 = Producto(2,3600,54,"2completo+bebida.jpg","2 completo + bebida")
+>>>>>>> Stashed changes
 prod3 = Producto(3,2000,70,"salchipapa +bebida.jpg","salchipapa + bebida")
 prod4 = Producto(4,5600,42,"chorrillana familiar+bebida.jpg","chorrillana familiar + bebida")
 prod5 = Producto(5,4500,56,"chorrillana+bebida.jpg","chorrillana + bebida")
@@ -109,6 +136,13 @@ def detalle(request,producto_id):
     if request.method == "POST":
         # Recolectar valores de los campos ocultos...
         idProd = request.POST.get("idProducto")
+<<<<<<< Updated upstream
+=======
+        precio = request.POST.get("precio")
+        stock = request.POST.get("stock")
+        foto = request.POST.get("foto")
+        descripcion = request.POST.get("descripcion")
+>>>>>>> Stashed changes
         cantidad = request.POST.get("cantidad")
 
         opc=request.POST.get("opc")
@@ -117,6 +151,7 @@ def detalle(request,producto_id):
                 context={"producto":producto}
                 break
         if opc=="Agregar al Carrito":
+<<<<<<< Updated upstream
                  
             listaCarrito.append(Carrito(idProd,producto.precio,producto.stock,producto.foto,producto.descripcion,cantidad))
             context={"listaCarrito":listaCarrito}
@@ -127,6 +162,13 @@ def detalle(request,producto_id):
                     if itemCarrito_list.id==codigo:
                         itemCarrito_list.stock=int(itemCarrito_list.stock)-int(cantidad)
                         break
+=======
+            
+
+            listaCarrito.append(Carrito(idProd,precio,stock,foto,descripcion,cantidad))
+            
+            context={"listaCarrito":listaCarrito}
+>>>>>>> Stashed changes
             return render(request,'html/carrito.html',context)
     return render(request,'html/detalleProd.html',context)
 
@@ -135,7 +177,11 @@ def carrito(request):
     return render(request,'html/carrito.html',context)
 
 def vaciar_carro(request):
+<<<<<<< Updated upstream
     listaCarrito.clear()
+=======
+    listaCarrito=[]
+>>>>>>> Stashed changes
     context={"listaCarrito":listaCarrito}
     return render(request,'html/carrito.html',context)
 #configuracion de inicio de sesion
