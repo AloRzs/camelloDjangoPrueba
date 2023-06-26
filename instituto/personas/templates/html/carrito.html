@@ -1,0 +1,41 @@
+{% extends 'html/navbarPadre.html'%}
+{%block content%}
+{%load static%}
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#id</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for producto in listaCarrito%}
+          <tr>
+            <th scope="row">{{producto.id}}</th>
+            <td><img src="{%static 'img/'%}{{producto.foto}}" class="img-thumbnail" alt="" width="100px"></td>
+            <td>{{producto.descripcion}} </td>
+            <td>{{producto.precio}} </td>
+            <td>{{producto.cantidad}} </td>
+          </tr>
+             
+        {%endfor%}
+        </tbody scope="col-6">
+        <tfoot>
+            <tr>
+                <td><a href="{%url 'vaciar_carro'%}">Vaciar</a></td>
+        </tbody scope="col-6">
+        <tfoot>
+            <tr>
+                <td>Precio Total:</td>
+                <td>$precio*cantidad</td>
+            </tr>
+        </tfoot>
+      </table>
+</div>
+
+
+{%endblock%}
