@@ -14,10 +14,6 @@
         </thead>
         <tbody>
             {% for producto in listaCarrito%}
-<<<<<<< Updated upstream
-             
-=======
->>>>>>> Stashed changes
           <tr>
             <th scope="row">{{producto.id}}</th>
             <td><img src="{%static 'img/'%}{{producto.foto}}" class="img-thumbnail" alt="" width="100px"></td>
@@ -25,19 +21,15 @@
             <td>{{producto.precio}} </td>
             <td>{{producto.cantidad}} </td>
           </tr>
-<<<<<<< Updated upstream
              
         {%endfor%}
         </tbody scope="col-6">
         <tfoot>
             <tr>
                 <td><a href="{%url 'vaciar_carro'%}">Vaciar</a></td>
-=======
-          {%endfor%}
         </tbody scope="col-6">
         <tfoot>
             <tr>
->>>>>>> Stashed changes
                 <td>Precio Total:</td>
                 <td>$precio*cantidad</td>
             </tr>
