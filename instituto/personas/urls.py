@@ -21,4 +21,9 @@ urlpatterns= [
     path('detalle/<int:producto_id>',views.detalle, name='detalle'),
     path('carrito/',views.carrito, name='carrito'),
     path('vaciar_carro/',views.vaciar_carro, name='vaciar_carro'),
+#path para el crud de productos
+    path('agregar_producto_crud/',views.agregar_producto_crud,name='agregar_producto_crud'),
+    path('mostrar_productos_crud/',views.mostrar_producto_crud,name='mostrar_productos_crud'),
+    path('modificar_crud/<int:producto_id>',views.modificar_crud,name='modificar_crud'),
+    path('eliminar_crud/<int:producto_id>',views.eliminar_combo,name='eliminar_crud'),
 ]

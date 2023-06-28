@@ -13,16 +13,19 @@
           </tr>
         </thead>
         <tbody>
-            {% for producto in listaCarrito%}
-          <tr>
-            <th scope="row">{{producto.id}}</th>
-            <td><img src="{%static 'img/'%}{{producto.foto}}" class="img-thumbnail" alt="" width="100px"></td>
-            <td>{{producto.descripcion}} </td>
-            <td>{{producto.precio}} </td>
-            <td>{{producto.cantidad}} </td>
-          </tr>
-             
-        {%endfor%}
+            {% for producto_carrito in listaCarrito%}
+              {% for producto in consulta_productos %}
+                {% if producto_carrito.id == producto.id_combo %}
+                  <tr>
+                    <th scope="row">{{producto.id_combo}}</th>
+                    <td><img src="{%static 'img/'%}{{producto.foto}}" class="img-thumbnail" alt="" width="100px"></td>
+                    <td>{{producto.descripcion}} </td>
+                    <td><input type="number" name="precioElemento" id="precioElemento" value="{{producto.precio}}" disabled></td>
+                    <td><input type="number" name="cantidadElemento" id="cantidadElemento" value="{{producto_carrito.cantidad}}" disabled></td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            {%endfor%}
         </tbody scope="col-6">
         <tfoot>
             <tr>
@@ -31,7 +34,7 @@
         <tfoot>
             <tr>
                 <td>Precio Total:</td>
-                <td>$precio*cantidad</td>
+                <td>$<p class="precioTotalElemento" value="" name="precioTotalElemento"></p></td>
             </tr>
         </tfoot>
       </table>
