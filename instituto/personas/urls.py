@@ -15,8 +15,9 @@ urlpatterns= [
     path('ers/',views.ers, name='ers'),
     path('compra/',views.compra, name='compra'),
 #path de la func login
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('mostrar_registro/', views.mostrar_registro, name='mostrar_registro'),
+    path('mostrar_entrar/', views.mostrar_entrar, name='mostrar_entrar'),
+    path('cerrar_sesion/', views.cerrar_sesion, name='cerrar_sesion'),
 #path de el carrito compra ojala vaya bien diosito
     path('detalle/<int:producto_id>',views.detalle, name='detalle'),
     path('carrito/',views.carrito, name='carrito'),

@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-from .models import Combo
-from .forms import FormularioCombo
+from django.contrib.auth import authenticate, login, logout
+from .models import Combo,DetalleVenta,Venta,User
+from .forms import FormularioCombo,FormularioLogin,FormularioRegistro
+
 # Create your views here.
 # class Persona:
 #     rut=""
@@ -92,6 +93,8 @@ def contacto(request):#contacto
 def lista_productos(request):#listado productos
     listaProductosMain = Combo.objects.all()
     context ={"listaProductosMain":listaProductosMain}
+
+
     return render(request,'html/nuestrosProductos.html',context)
 
 def nosotros(request):# nosotros
@@ -129,7 +132,6 @@ def detalle(request,producto_id):
 
         opc=request.POST.get("opc")
         
-        
         if opc=="Agregar al Carrito":
             se_encontro=0
             print(opc)
@@ -155,8 +157,44 @@ def detalle(request,producto_id):
 def carrito(request):
     for i in listaCarrito:
         print(i)
+    total_carrito = 0
+
+    for item in listaCarrito:
+        producto = Combo.objects.get(id_combo=item.id)
+        subtotal = producto.precio * item.cantidad
+        total_carrito += subtotal
     consulta_productos=Combo.objects.all()
-    context={"listaCarrito":listaCarrito,"consulta_productos":consulta_productos}
+
+    if request.method=='POST':
+        consulta_productos=Combo.objects.all()
+        usuario=request.user
+        for itemCarrito in listaCarrito:
+            producto = Combo.objects.get(id_combo=itemCarrito.id)
+            cantidad=itemCarrito.cantidad
+            subtotal=int(itemCarrito.cantidad)*int(itemCarrito.precio)
+            try:
+                det_venta_it = DetalleVenta(
+                #falta la id de detalle y tengo que instanciar el combo
+                id_combo=producto,
+                cantidad=cantidad,
+                subtotal=subtotal,
+                )
+                producto.stock-=cantidad
+                det_venta_it.save()
+                producto.save()
+            except:
+                print("Ocurrió un error")
+                return redirect('index')
+        venta_it=Venta(
+            total=total_carrito,
+            id_detalle_venta=det_venta_it,
+            id_usuario=User.objects.get(username=usuario)
+        )
+        venta_it.save()
+
+        return redirect ('index')
+
+    context={"listaCarrito":listaCarrito,"consulta_productos":consulta_productos,"total_carrito":total_carrito}
     return render(request,'html/carrito.html',context)
 
 def vaciar_carro(request):
@@ -164,26 +202,28 @@ def vaciar_carro(request):
     context={"listaCarrito":listaCarrito}
     return render(request,'html/carrito.html',context)
 
+
+@login_required
 def agregar_producto_crud(request):
     if request.method=='GET':
         context={
             'formulario':FormularioCombo()
         }
     if request.method=='POST':
-        datos_nota=FormularioCombo(data = request.POST)
-        es_valido = datos_nota.is_valid()
+        datos_producto=FormularioCombo(data = request.POST)
+        es_valido = datos_producto.is_valid()
 
         if es_valido:
-            nota_creada= datos_nota.save(commit=False)
-            nota_creada.usuario = request.user
-            nota_creada.save()
+            producto_creado= datos_producto.save(commit=False)
+            producto_creado.usuario = request.user
+            producto_creado.save()
         # A continuacion se mostraran los datos en el que se este equivocando el usuario
         context={
-            'formulario':datos_nota
+            'formulario':datos_producto
         }
         return render(request, 'html/crud_agregar.html', context)
     return render(request,'html/crud_agregar.html',context)
-
+@login_required
 def mostrar_producto_crud(request):
     consulta_productos=Combo.objects.all()
     context={"consulta_productos":consulta_productos}
@@ -208,30 +248,87 @@ def eliminar_combo(request, producto_id):
         return redirect('mostrar_productos_crud')
     return redirect('listar_combos')
 
-
-
 #configuracion de inicio de sesion
-usuarios = [
-{'username': 'mati', 'password': '123'},
-{'username': 'alonso', 'password': '123'},
-]
-def login(request):
+# ESTO SE NECESITA ACTUALIZAR
+# usuarios = [
+# {'username': 'mati', 'password': '123'},
+# {'username': 'alonso', 'password': '123'},
+# ]
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+
+#         for usuario in usuarios:
+#             if usuario['username'] == username and usuario['password'] == password:
+#                 request.session['username'] = username  
+#                 return redirect('index')  
+
+#         error_message = 'Nombre de usuario o contraseña incorrectos.'
+#         return render(request, 'html/login.html', {'error': error_message})
+#     else:
+#         return render(request, 'html/login.html')
+
+
+# def logout_view(request):
+#     logout(request)
+#     request.session.clear()  
+#     return redirect('login')
+
+##Remaster LOGIN##
+
+def mostrar_entrar(request):
+    if request.method == 'GET':
+        contexto = {
+            'formulario':FormularioLogin(),
+            'titulo':'Bienvenido',
+            'formulario_original': FormularioLogin(),
+        }
+        return render(request, 'html/usuario_login.html',contexto)
+    elif request.method == 'POST':
+        datos_usuario = FormularioLogin(data=request.POST)
+        print(datos_usuario.data)
+        es_valido = datos_usuario.is_valid()
+        print(datos_usuario.errors)
+        if es_valido:
+            username = datos_usuario.cleaned_data['username']
+            password = datos_usuario.cleaned_data['password']
+            print(username,password)
+            usuario = authenticate(username=username,password=password)
+            if usuario is not None:
+                login(request,usuario)
+                return redirect('index')
+            else:
+                # Mandar al lobby
+                return redirect('mostrar_entrar')
+        contexto = {
+            'formulario_original': datos_usuario,
+            'formulario':FormularioLogin()
+        }
+        return render(request, 'html/usuario_login.html',contexto)
+
+def mostrar_registro(request):
+    if request.method == 'GET':
+        contexto = {
+            'formulario': FormularioRegistro()
+        }
+        return render(request,'html/usuario_registro.html', contexto)
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
-        for usuario in usuarios:
-            if usuario['username'] == username and usuario['password'] == password:
-                request.session['username'] = username  
-                return redirect('index')  
-
-        error_message = 'Nombre de usuario o contraseña incorrectos.'
-        return render(request, 'html/login.html', {'error': error_message})
-    else:
-        return render(request, 'html/login.html')
-
-
-def logout_view(request):
-    logout(request)
-    request.session.clear()  
-    return redirect('login')
+        datos_formulario = FormularioRegistro(data=request.POST)
+        print(datos_formulario.data)
+        es_valido = datos_formulario.is_valid()
+        print(es_valido)
+        if es_valido:
+            datos_formulario.save()
+            return redirect('index')
+        contexto = {
+            'formulario': datos_formulario
+        }
+        return render(request, 'html/usuario_registro.html', contexto)
+    
+def cerrar_sesion(request):
+    if request.user.is_authenticated:
+        logout(request)
+        print("Se ha salido de la sesión")
+    #Siempre se manda a la pagina principal independiente de si el usuario esta ingresado en la pagina o no
+    return redirect ('index')

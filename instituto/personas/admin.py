@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from .models import(
-    Usuario,
     Venta,
     DetalleVenta,
     RegistroVenta,
@@ -9,7 +8,6 @@ from .models import(
 )
 
 # Register your models here.
-admin.site.register(Usuario)
 admin.site.register(Venta)
 admin.site.register(DetalleVenta)
 admin.site.register(RegistroVenta)

@@ -29,16 +29,50 @@
         </tbody scope="col-6">
         <tfoot>
             <tr>
-                <td><a href="{%url 'vaciar_carro'%}">Vaciar</a></td>
+                <td>
+                  <a href="{%url 'vaciar_carro'%}"><p style="font-size: 20px;">Vaciar</p></a>
+                </td>
         </tbody scope="col-6">
         <tfoot>
             <tr>
-                <td>Precio Total:</td>
-                <td>$<p class="precioTotalElemento" value="" name="precioTotalElemento"></p></td>
+                <td><p>Precio Total</p></td>
+                <td><p class="precioTotalElemento" value="{{total_carrito}}" name="precioTotalElemento">$ {{total_carrito}}</p></td>
+                <td>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Realizar compra
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" 
+                      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel" style="font-family: Helvetica;font-size: larger;color: black;">Confirmar compra</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p style="font-size: 30px;">¿Estas seguro de que quieres confirmar compra?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                          <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="usuario" value="{{total_carrito}}">
+        
+                            <input type="submit" name="opc" value="Realizar Compra">
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- xd -->
+                  
+                </td>
             </tr>
         </tfoot>
       </table>
 </div>
-
 
 {%endblock%}

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'personas'
+    'personas',
 ]
 
 MIDDLEWARE = [
@@ -115,12 +115,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'C:/Users/alons/Documents/GitHub/camelloDjangoPrueba/instituto/static/estilos'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 LOGIN_URL = '/index/'
-LOGIN_REDIRECT_URL = 'mostrar_productos_crud'
