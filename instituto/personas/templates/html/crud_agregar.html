@@ -1,0 +1,13 @@
+{% extends 'html/navbarPadre.html'%}
+{% load static %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{formulario}}
+    <br>
+    <button type="submit" style="border: black solid 2px 2px;">Guardar</button>
+</form>
+<br>
+<br>
+<a href="{% url 'mostrar_productos_crud'%}">Ver Lista</a>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'html/navbarPadre.html'%}
+{% load static %}
+{% block content %}
+<!-- Agregar lista para modificar y eliminar -->
+<div class="container">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Imagen Referencial</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for producto in consulta_productos %}
+      <tr>
+        <!-- 'descripcion','stock','precio','foto' -->
+        <th>Producto: {{producto.id_combo}}</th>
+        <td>{{producto.descripcion}}</td>
+        <td>{{producto.stock}}</td>
+        <td>{{producto.precio}}</td>
+        <td><img src="{%static 'img/'%}{{producto.foto}}" alt="" style="max-width: 70px;"></td>
+        <td>
+            <form method="POST" action="{% url 'modificar_crud' producto_id=producto.id_combo %}">
+            {% csrf_token %}
+            <button type="submit">Modificar</button>
+          </form>
+        </td>
+        <td>
+            <form method="POST" action="{% url 'eliminar_crud' producto_id=producto.id_combo %}">
+            {% csrf_token %}
+            <button type="submit">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
+<a href="{% url 'agregar_producto_crud'%}">Agregar Nuevo Producto</a>
+{% endblock %}

@@ -4,6 +4,16 @@
 {% load static %}
 
 {% block content %}
+{% if messages %}
+<div class="alert alert-success" role="alert">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Resto del contenido de tu template index -->
+
   <div class="alert alert-warning" role="alert">
     <h6 style="text-align:center">bienvenido a camello's Food en donde encontraras lo mas rico <img src="{%static 'img/emoji rico.png'%}" alt="" height="20" ></h6>
 

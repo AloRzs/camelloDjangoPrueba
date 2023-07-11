@@ -24,21 +24,21 @@
         <div class="card mb-3" >
           <img src="{%static 'img/'%}{{producto.foto}}" class="img-thumbnail card-img-top" alt="">
           <div class="card-body">
-            <h5 class="card-title" name="idProducto"> Combo: {{producto.id}} </h5>
+            <h5 class="card-title" name="idProducto"> Combo: {{producto.id_combo}} </h5>
             <p class="card-text parrafoDesc" name="descProducto"> {{producto.descripcion}} </p>
             <p class="card-text"><small class="text-muted precio" name="precioProducto">Precio: ${{producto.precio}}</small></p>
             <p class="card-text"><small class="text-muted" name="productoStock">Stock: {{producto.stock}}</small></p>
-            <form action="{% url 'detalle' producto_id=producto.id %}" method="post">
+            <form action="{% url 'detalle' producto_id=producto.id_combo %}" method="post">
               {% csrf_token %}
               <input type="hidden" name="idProducto" value="{{producto.id}}">
               <input type="hidden" name="foto" value="{{producto.foto}}">
               <input type="hidden" name="descripcion" value="{{producto.descripcion}}">
               <input type="hidden" name="precio" value="{{producto.precio}}">
-
+              <input type="hidden" name="stock" value="{{producto.stock}}">
 
               <input type="submit" value="Detalle">
             </form>
-            
+
           </div>
         </div> 
     </div>

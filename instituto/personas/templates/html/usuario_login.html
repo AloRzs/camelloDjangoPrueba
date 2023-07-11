@@ -1,0 +1,22 @@
+{% extends 'html/navbarPadre.html' %}
+{% load static %}
+
+{% block content %}
+<main class="form-signin w-100 m-auto text-center">
+    <form method="POST">
+      <img class="mb-4" src="{%static 'img/logo camello.png'%}" alt="" width="100" height="100" style="border-radius: 7px;">
+      <h1 class="mb-3 fw-normal">{{ titulo }}</h1>
+      {% csrf_token %}
+      <div class="form-floating">
+        {{ formulario_original.username }}
+        <label for="{{ formulario_original.username.id_for_label }}">{{ formulario_original.username.label }}</label>
+      </div>
+      <div class="form-floating">
+        {{ formulario_original.password }}
+        <label for="{{ formulario_original.password.id_for_label }}">{{ formulario_original.password.label }}</label>
+      
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+    </form>
+  </main>
+{% endblock %}
