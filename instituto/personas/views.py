@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Combo,DetalleVenta,Venta,User
 from .forms import FormularioCombo,FormularioLogin,FormularioRegistro
-
+from django.contrib import messages
 # Create your views here.
 # class Persona:
 #     rut=""
@@ -93,8 +93,6 @@ def contacto(request):#contacto
 def lista_productos(request):#listado productos
     listaProductosMain = Combo.objects.all()
     context ={"listaProductosMain":listaProductosMain}
-
-
     return render(request,'html/nuestrosProductos.html',context)
 
 def nosotros(request):# nosotros
@@ -111,16 +109,18 @@ def compra(request):# compra
     
     context ={}
     return render(request,'html/compra.html',context)
+#Para las tablas detalle ventas y venta
+def tabla_ventas(request):
+    consulta_ventas=Venta.objects.all()
+    return render(request,'html/tabla_ventas.html',{'consulta_ventas':consulta_ventas})
 
-
+#fin
 def detalle(request,producto_id):
-    
     consulta_productos=Combo.objects.all()
     for producto in consulta_productos:
             if producto.id_combo==producto_id:
                 context={"producto":producto,"consulta_productos":consulta_productos}
                 break
-
     if request.method == "POST":
         # Recolectar valores de los campos ocultos...
         idProd = request.POST.get("idProducto")
@@ -154,48 +154,61 @@ def detalle(request,producto_id):
             return redirect('carrito')
     return render(request,'html/detalleProd.html',context)
 
+
+
 def carrito(request):
     for i in listaCarrito:
         print(i)
     total_carrito = 0
-
+    det_venta_objetos=[]
     for item in listaCarrito:
         producto = Combo.objects.get(id_combo=item.id)
         subtotal = producto.precio * item.cantidad
         total_carrito += subtotal
-    consulta_productos=Combo.objects.all()
-
-    if request.method=='POST':
-        consulta_productos=Combo.objects.all()
-        usuario=request.user
+    consulta_productos = Combo.objects.all()
+    
+    if request.method == 'POST':
+        usuario = request.user
         for itemCarrito in listaCarrito:
             producto = Combo.objects.get(id_combo=itemCarrito.id)
-            cantidad=itemCarrito.cantidad
-            subtotal=int(itemCarrito.cantidad)*int(itemCarrito.precio)
+            cantidad = itemCarrito.cantidad
+            subtotal = int(itemCarrito.cantidad) * int(itemCarrito.precio)
+
+            det_venta_objetos.append(DetalleVenta(id_combo=producto,cantidad=cantidad,subtotal=subtotal))
             try:
                 det_venta_it = DetalleVenta(
-                #falta la id de detalle y tengo que instanciar el combo
-                id_combo=producto,
-                cantidad=cantidad,
-                subtotal=subtotal,
+                    # falta la id de detalle y tengo que instanciar el combo
+                    id_combo=producto,
+                    cantidad=cantidad,
+                    subtotal=subtotal,
                 )
-                producto.stock-=cantidad
+                producto.stock -= cantidad
                 det_venta_it.save()
                 producto.save()
             except:
                 print("Ocurrió un error")
                 return redirect('index')
-        venta_it=Venta(
-            total=total_carrito,
-            id_detalle_venta=det_venta_it,
-            id_usuario=User.objects.get(username=usuario)
-        )
-        venta_it.save()
+        try:
+            venta_it = Venta(
+                total=total_carrito,
+                id_detalle_venta=det_venta_it,
+                id_usuario=User.objects.get(username=usuario)
+            )
+            venta_it.save()
+            listaCarrito.clear()
+            print("Se realizó compra")
+            messages.success(request, 'Compra realizada exitosamente')
+            return redirect('index')
+        except:
+            print("No se encuentra usuario en la sesión")
+            return redirect('index')
 
-        return redirect ('index')
-
-    context={"listaCarrito":listaCarrito,"consulta_productos":consulta_productos,"total_carrito":total_carrito}
-    return render(request,'html/carrito.html',context)
+    context = {
+        "listaCarrito": listaCarrito,
+        "consulta_productos": consulta_productos,
+        "total_carrito": total_carrito
+    }
+    return render(request, 'html/carrito.html', context)
 
 def vaciar_carro(request):
     listaCarrito.clear()
@@ -310,21 +323,26 @@ def mostrar_entrar(request):
 def mostrar_registro(request):
     if request.method == 'GET':
         contexto = {
-            'formulario': FormularioRegistro()
-        }
-        return render(request,'html/usuario_registro.html', contexto)
-    if request.method == 'POST':
-        datos_formulario = FormularioRegistro(data=request.POST)
-        print(datos_formulario.data)
-        es_valido = datos_formulario.is_valid()
-        print(es_valido)
-        if es_valido:
-            datos_formulario.save()
-            return redirect('index')
-        contexto = {
-            'formulario': datos_formulario
+            'formulario': FormularioRegistro(),
+            'mensaje': None  # Inicialmente establecido como None
         }
         return render(request, 'html/usuario_registro.html', contexto)
+    if request.method == 'POST':
+        datos_formulario = FormularioRegistro(data=request.POST)
+        if datos_formulario.is_valid():
+            datos_formulario.save()
+            mensaje = "¡Registro exitoso!"  # Mensaje de registro exitoso
+            contexto = {
+                'formulario': datos_formulario,
+                'mensaje': mensaje
+            }
+            return render(request, 'html/usuario_registro.html', contexto)
+        else:
+            contexto = {
+                'formulario': datos_formulario,
+                'mensaje': 'Datos Incorrectos, revise el formulario que contenga valores válidos'  # No se muestra ningún mensaje en caso de errores de validación
+            }
+            return render(request, 'html/usuario_registro.html', contexto)
     
 def cerrar_sesion(request):
     if request.user.is_authenticated:

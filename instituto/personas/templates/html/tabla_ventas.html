@@ -1,0 +1,47 @@
+{% extends 'html/navbarPadre.html'%}
+{% block content %}
+<div class="container">
+<table class="table table-hover">
+    
+    <thead>
+        <tr><th>Ventas</th></tr>
+        <th>Id de Venta</th>
+        <th>Fecha realizada del pago</th>
+        <th>Monto total de la transacción</th>
+        <th>Detalle de Venta</th>
+        <th>Combo</th>
+        <th>Usuario</th>
+    </thead>
+    <tbody>
+    {% for venta in consulta_ventas%}
+    <tr>
+        <td>{{venta.id_venta}}</td>
+        <td>{{venta.fecha}}</td>
+        <td class="precioVenta">{{venta.total}}</td>
+        <td>{{venta.id_detalle_venta.id_combo.id_combo}}</td>
+        <td>{{venta.id_detalle_venta.id_combo.descripcion}}</td>
+        <td>{{venta.id_usuario}}</td>
+    </tr>
+    
+   {% endfor %}
+   
+</tbody>
+
+</table>
+</div>
+<div class="container">
+    <p class="recaudado"></p>
+</div>
+        
+
+<script>
+    $(document).ready(function(){
+        var totalVentas = 0;
+        $(".precioVenta").each(function() {
+            var precioVenta = parseInt($(this).text());
+            totalVentas += precioVenta;
+        });
+        $(".recaudado").text("Total recaudado: $" + totalVentas);
+    });
+</script>
+{% endblock %}

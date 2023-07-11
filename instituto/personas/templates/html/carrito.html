@@ -3,6 +3,7 @@
 {%load static%}
 <div class="container">
     <table class="table table-hover">
+      {% if listaCarrito %}
         <thead>
           <tr>
             <th scope="col">#id</th>
@@ -26,24 +27,24 @@
                 {% endif %}
               {% endfor %}
             {%endfor%}
-        </tbody scope="col-6">
-        <tfoot>
-            <tr>
-                <td>
-                  <a href="{%url 'vaciar_carro'%}"><p style="font-size: 20px;">Vaciar</p></a>
-                </td>
-        </tbody scope="col-6">
-        <tfoot>
-            <tr>
-                <td><p>Precio Total</p></td>
-                <td><p class="precioTotalElemento" value="{{total_carrito}}" name="precioTotalElemento">$ {{total_carrito}}</p></td>
-                <td>
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Realizar compra
-                  </button>
-
                   <!-- Modal -->
+                  
+                </tbody scope="col-6">
+                <tfoot>
+                    <tr>
+                        <td>
+                          <a href="{%url 'vaciar_carro'%}"><p style="font-size: 20px;">Vaciar</p></a>
+                        </td>
+                </tbody scope="col-6">
+                <tfoot>
+                  <tr>
+                    <td><p>Precio Total</p></td>
+                    <td><p class="precioTotalElemento" value="{{total_carrito}}" name="precioTotalElemento">$ {{total_carrito}}</p></td>
+                    <td>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Realizar compra
+                      </button>
                   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" 
                       tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -67,12 +68,26 @@
                       </div>
                     </div>
                   </div>
+                  {% if messages %}
+                  <div class="alert alert-success" role="alert">
+                      {% for message in messages %}
+                          {{ message }}
+                      {% endfor %}
+                  </div>
+              {% endif %}
+          
+        {% else %}
+        <div class="alert alert-warning mt-3">
+            El carrito está vacío. Agrega productos para realizar una compra.
+        </div>
+        {% endif %}
                   <!-- xd -->
                   
                 </td>
             </tr>
         </tfoot>
       </table>
+
 </div>
 
 {%endblock%}

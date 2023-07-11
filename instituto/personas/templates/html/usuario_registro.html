@@ -64,5 +64,10 @@
             </fieldset>
         </section>
     </form>
+    <div id="registro-mensaje">
+        {% if mensaje %}
+        <p>{{ mensaje }}</p>
+        {% endif %}
+    </div>
 </main>
 {% endblock %}
