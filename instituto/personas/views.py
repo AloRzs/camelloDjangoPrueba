@@ -176,15 +176,19 @@ def carrito(request):
 
             det_venta_objetos.append(DetalleVenta(id_combo=producto,cantidad=cantidad,subtotal=subtotal))
             try:
-                det_venta_it = DetalleVenta(
-                    # falta la id de detalle y tengo que instanciar el combo
-                    id_combo=producto,
-                    cantidad=cantidad,
-                    subtotal=subtotal,
-                )
-                producto.stock -= cantidad
-                det_venta_it.save()
-                producto.save()
+                if request.user.is_authenticated:
+                    det_venta_it = DetalleVenta(
+                        # falta la id de detalle y tengo que instanciar el combo
+                        id_combo=producto,
+                        cantidad=cantidad,
+                        subtotal=subtotal,
+                    )
+                    producto.stock -= cantidad
+                    det_venta_it.save()
+                    producto.save()
+                else:
+                    print("No se ha encontrado un usuario en la sesion al confirmar compra")
+                    listaCarrito.clear()
             except:
                 print("Ocurrió un error")
                 return redirect('index')
@@ -330,13 +334,9 @@ def mostrar_registro(request):
     if request.method == 'POST':
         datos_formulario = FormularioRegistro(data=request.POST)
         if datos_formulario.is_valid():
-            datos_formulario.save()
-            mensaje = "¡Registro exitoso!"  # Mensaje de registro exitoso
-            contexto = {
-                'formulario': datos_formulario,
-                'mensaje': mensaje
-            }
-            return render(request, 'html/usuario_registro.html', contexto)
+            usuario = datos_formulario.save()  # Guardar el usuario
+            login(request, usuario)  # Iniciar sesión automáticamente
+            return redirect('index')  # Redireccionar al index
         else:
             contexto = {
                 'formulario': datos_formulario,
